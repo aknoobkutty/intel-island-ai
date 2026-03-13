@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      agents: {
+        Row: {
+          avatar_url: string | null
+          category: string
+          created_at: string
+          creator: string
+          creator_id: string | null
+          demo_url: string | null
+          description: string
+          github_url: string | null
+          id: string
+          name: string
+          pricing: string
+          rating: number
+          short_description: string
+          tags: string[]
+          updated_at: string
+          users_count: number
+        }
+        Insert: {
+          avatar_url?: string | null
+          category: string
+          created_at?: string
+          creator: string
+          creator_id?: string | null
+          demo_url?: string | null
+          description: string
+          github_url?: string | null
+          id?: string
+          name: string
+          pricing?: string
+          rating?: number
+          short_description: string
+          tags?: string[]
+          updated_at?: string
+          users_count?: number
+        }
+        Update: {
+          avatar_url?: string | null
+          category?: string
+          created_at?: string
+          creator?: string
+          creator_id?: string | null
+          demo_url?: string | null
+          description?: string
+          github_url?: string | null
+          id?: string
+          name?: string
+          pricing?: string
+          rating?: number
+          short_description?: string
+          tags?: string[]
+          updated_at?: string
+          users_count?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
