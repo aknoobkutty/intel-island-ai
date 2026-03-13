@@ -52,7 +52,7 @@ const Index = () => {
               Explore a curated marketplace of AI agents built by developers worldwide. 
               Search, discover, and deploy agents that supercharge your workflow.
             </p>
-            <SearchBar value={search} onChange={setSearch} />
+            {/* <SearchBar value={search} onChange={setSearch} /> */}
           </motion.div>
         </section>
 
