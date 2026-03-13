@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import SearchBar from "@/components/SearchBar";
+//import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import AgentCard from "@/components/AgentCard";
 import AgentDetailModal from "@/components/AgentDetailModal";
