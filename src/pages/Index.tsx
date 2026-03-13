@@ -1,20 +1,21 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-//import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import AgentCard from "@/components/AgentCard";
 import AgentDetailModal from "@/components/AgentDetailModal";
-import { MOCK_AGENTS, type Agent } from "@/lib/agents-data";
-import { Sparkles } from "lucide-react";
+import type { Agent } from "@/lib/agents-data";
+import { useAgents } from "@/hooks/use-agents";
+import { Sparkles, Loader2 } from "lucide-react";
 
 const Index = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
+  const { data: agents = [], isLoading } = useAgents();
 
   const filtered = useMemo(() => {
-    return MOCK_AGENTS.filter((a) => {
+    return agents.filter((a) => {
       const matchesCategory = category === "All" || a.category === category;
       const q = search.toLowerCase();
       const matchesSearch =
@@ -25,7 +26,7 @@ const Index = () => {
         a.category.toLowerCase().includes(q);
       return matchesCategory && matchesSearch;
     });
-  }, [search, category]);
+  }, [agents, search, category]);
 
   return (
     <div className="min-h-screen bg-background bg-grid">
@@ -33,7 +34,6 @@ const Index = () => {
       <Navbar />
 
       <main className="relative pt-24 pb-16 px-4">
-        {/* Hero */}
         <section className="container mx-auto text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -49,19 +49,16 @@ const Index = () => {
               <span className="text-gradient">AI Agent</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              Explore a curated marketplace of AI agents built by developers worldwide. 
+              Explore a curated marketplace of AI agents built by developers worldwide.
               Search, discover, and deploy agents that supercharge your workflow.
             </p>
-            {/* <SearchBar value={search} onChange={setSearch} /> */}
           </motion.div>
         </section>
 
-        {/* Filters */}
         <section className="container mx-auto mb-10">
           <CategoryFilter selected={category} onChange={setCategory} />
         </section>
 
-        {/* Results */}
         <section className="container mx-auto">
           <div className="flex items-center justify-between mb-6">
             <p className="text-sm text-muted-foreground">
@@ -69,7 +66,11 @@ const Index = () => {
             </p>
           </div>
 
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="text-center py-20">
+              <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-muted-foreground text-lg">No agents found matching your criteria.</p>
               <p className="text-sm text-muted-foreground mt-2">Try adjusting your search or filters.</p>
