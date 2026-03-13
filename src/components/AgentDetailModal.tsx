@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Users, ExternalLink, Github, Calendar } from "lucide-react";
+import { Star, Users, ExternalLink, Code, Calendar } from "lucide-react";
 import type { Agent } from "@/lib/agents-data";
 
 interface AgentDetailModalProps {
@@ -72,8 +72,8 @@ const AgentDetailModal = ({ agent, open, onClose }: AgentDetailModalProps) => {
               Try Agent
             </Button>
             <Button variant="outline">
-              <Github className="w-4 h-4" />
-              Source
+              <Code className="w-4 h-4" />
+              Buy Agent
             </Button>
           </div>
         </div>
